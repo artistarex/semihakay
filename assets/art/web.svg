@@ -1,0 +1,35 @@
+<svg width="900" height="1600" viewBox="0 0 900 1600" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<filter id="glow2" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="12" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<radialGradient id="mesh" cx="0.3" cy="0.3" r="1"><stop offset="0" stop-color="#9d7bff" stop-opacity="0.85"/><stop offset="0.5" stop-color="#6a4fc0" stop-opacity="0.5"/><stop offset="1" stop-color="#100d18" stop-opacity="0"/></radialGradient>
+<linearGradient id="win" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#171226"/><stop offset="1" stop-color="#120e1d"/></linearGradient>
+</defs>
+<rect width="900" height="1600" fill="#100d18"/>
+<g stroke="#9d7bff" stroke-opacity="0.06" stroke-width="1">
+<path d="M-100 300L1000 100M-100 600L1000 400M-100 900L1000 700M-100 1200L1000 1000M-100 1500L1000 1300"/>
+</g>
+<g opacity="0.55">
+<rect x="140" y="430" width="480" height="330" rx="18" fill="url(#win)" stroke="#9d7bff" stroke-opacity="0.35" stroke-width="2"/>
+<circle cx="176" cy="466" r="7" fill="#9d7bff" fill-opacity="0.5"/><circle cx="202" cy="466" r="7" fill="#9d7bff" fill-opacity="0.35"/><circle cx="228" cy="466" r="7" fill="#9d7bff" fill-opacity="0.2"/>
+</g>
+<g opacity="0.75">
+<rect x="220" y="560" width="500" height="350" rx="18" fill="url(#win)" stroke="#9d7bff" stroke-opacity="0.5" stroke-width="2"/>
+<circle cx="256" cy="596" r="7" fill="#9d7bff" fill-opacity="0.6"/><circle cx="282" cy="596" r="7" fill="#9d7bff" fill-opacity="0.4"/><circle cx="308" cy="596" r="7" fill="#9d7bff" fill-opacity="0.25"/>
+</g>
+<g filter="url(#glow2)">
+<rect x="300" y="700" width="520" height="380" rx="20" fill="url(#win)" stroke="#9d7bff" stroke-width="3"/>
+</g>
+<circle cx="338" cy="738" r="8" fill="#9d7bff"/><circle cx="366" cy="738" r="8" fill="#9d7bff" fill-opacity="0.6"/><circle cx="394" cy="738" r="8" fill="#9d7bff" fill-opacity="0.35"/>
+<rect x="430" y="726" width="360" height="24" rx="12" fill="#1d1730"/>
+<ellipse cx="470" cy="950" rx="220" ry="160" fill="url(#mesh)"/>
+<rect x="340" y="800" width="200" height="26" rx="13" fill="#9d7bff" fill-opacity="0.85"/>
+<rect x="340" y="846" width="130" height="14" rx="7" fill="#9d7bff" fill-opacity="0.4"/>
+<rect x="340" y="874" width="160" height="14" rx="7" fill="#9d7bff" fill-opacity="0.25"/>
+<rect x="660" y="990" width="120" height="44" rx="22" fill="#9d7bff"/>
+<g filter="url(#glow2)">
+<path d="M600 1130 L640 1230 L662 1188 L706 1206 Z" fill="#e8defc" stroke="#9d7bff" stroke-width="2"/>
+<path d="M720 1120 l10 -26 10 26 26 10 -26 10 -10 26 -10 -26 -26 -10 Z" fill="#9d7bff"/>
+</g>
+<circle cx="180" cy="1180" r="6" fill="#9d7bff" fill-opacity="0.6"/>
+<circle cx="740" cy="420" r="8" fill="#9d7bff" fill-opacity="0.5"/>
+</svg>

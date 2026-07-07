@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Semih Akay — Portfolio</title>
+<link rel="icon" href="Logo/semih-akay-logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Noto+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #080706;
+    --panel: #0f0d0a;
+    --gold: #d4b078;
+    --gold-deep: #b08c4f;
+    --gold-soft: #e6c98e;
+    --ink: #cbc0ac;
+    --ink-dim: rgba(203, 192, 172, 0.75);
+}
+html { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; }
+html, body { min-height: 100vh; }
+body {
+    margin: 0;
+    background-color: var(--bg);
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.logo, h1, h2 {
+    margin: 0;
+    line-height: 1;
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+}
+p { margin: 0; }
+.stage {
+    position: relative;
+    background: var(--bg);
+    visibility: hidden;
+}
+
+/* Nav Header */
+.header {
+    position: fixed;
+    left: 40px;
+    top: 24px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+}
+@media all and (max-width: 768px) {
+    .header { display: block; left: 24px; }
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+}
+.logo img { width: 44px; height: 44px; display: block; }
+.nav-btn, .nav-btn__svg { width: 56px; height: 30px; }
+.nav-btn { display: block; margin: -2px 0 0 56px; }
+@media all and (max-width: 768px) {
+    .nav-btn { margin: 18px 0 0 -6px; }
+}
+.nav-btn__svg { pointer-events: none; }
+.lang-btn {
+    display: block;
+    margin: 1px 0 0 32px;
+    padding: 5px 14px;
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-decoration: none;
+    border: 1px solid var(--gold-deep);
+}
+.lang-btn:hover { background: var(--gold-deep); color: #050505; }
+@media all and (max-width: 768px) {
+    .lang-btn { display: inline-block; margin: 14px 0 0 0; }
+}
+
+/* Intro */
+.intro, .footer { height: 100vh; }
+.intro {
+    position: relative;
+    padding: 5vw;
+    background: #0a0908;
+    overflow: hidden;
+}
+.intro__content {
+    position: absolute;
+    right: 8%;
+    bottom: 15%;
+    z-index: 3;
+}
+@media all and (max-width: 768px) {
+    .intro__content { right: auto; }
+}
+.intro__title {
+    font-size: 12.75vw;
+    overflow: hidden;
+    letter-spacing: -0.5vw;
+    padding-right: 1vw;
+    color: var(--gold);
+    text-transform: uppercase;
+}
+.intro__title .intro-line { display: block; }
+.intro__title .intro-line--2 { margin-top: -1.9vw; color: var(--gold-soft); }
+@media all and (max-width: 768px) {
+    .intro__title { margin-bottom: 5vh; font-size: 16.5vw; }
+}
+.intro__img {
+    position: absolute;
+    width: 35%;
+    max-width: 390px;
+    height: auto;
+}
+@media all and (max-width: 768px) {
+    .intro__img { width: 75vw; }
+}
+.intro__img--1 {
+    z-index: 2;
+    left: 10%;
+    bottom: 35%;
+    filter: drop-shadow(0 30px 50px rgba(0,0,0,.55));
+}
+@media all and (max-width: 768px) {
+    .intro__img--1 { left: 50%; bottom: 50vh; }
+}
+.intro__img--2 {
+    z-index: 1;
+    left: 25%;
+    bottom: 40%;
+    opacity: .85;
+}
+@media all and (max-width: 768px) {
+    .intro__img--2 { left: 70%; bottom: 60vh; }
+}
+.intro__txt {
+    max-width: 35vw;
+    margin-left: 25vw;
+    color: var(--ink-dim);
+}
+@media all and (max-width: 768px) {
+    .intro__txt { max-width: 80vw; margin-left: 5vw; }
+}
+
+/* Slides */
+.slide {
+    display: flex;
+    align-items: stretch;
+    height: 100vh;
+    overflow: hidden;
+}
+.slide:nth-of-type(even) { background: #0c0a08; }
+@media all and (max-width: 768px) {
+    .slide { display: block; position: relative; }
+}
+
+/* Columns */
+.col { flex-basis: 50%; }
+@media all and (max-width: 768px) {
+    .col { display: block; width: 100%; height: 100vh; }
+}
+.col--1 { position: relative; z-index: 1; }
+.col--2 { position: relative; overflow: hidden; }
+@media all and (max-width: 768px) {
+    .col--2 { position: absolute; z-index: 0; left: 0; top: 0; }
+}
+
+/* Column Content */
+.col__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    height: 100%;
+    padding: 6vw 6vw 10vw;
+}
+@media all and (max-width: 768px) {
+    .col__content { width: 80%; }
+}
+.col__content--1 { background: #17120b; }
+.col__content--2 { background: #12100d; }
+.col__content--3 { background: #171009; }
+.col__content--4 { background: #100e0b; }
+@media all and (max-width: 768px) {
+    .col__content--1 { background: rgba(23,18,11,0.92); }
+    .col__content--2 { background: rgba(18,16,13,0.92); }
+    .col__content--3 { background: rgba(23,16,9,0.92); }
+    .col__content--4 { background: rgba(16,14,11,0.92); }
+}
+.col__content-title {
+    margin: 0 0 2vw;
+    font-size: 9.5vw;
+    letter-spacing: -0.3vw;
+    color: var(--gold);
+}
+@media all and (max-width: 768px) {
+    .col__content-title { margin: 0 0 6vw; font-size: 15vw; }
+}
+.col__content-title .no {
+    color: var(--gold-deep);
+    font-size: 4.5vw;
+    letter-spacing: 0.4vw;
+}
+@media all and (max-width: 768px) {
+    .col__content-title .no { font-size: 8vw; }
+}
+.col__content-wrap {
+    display: flex;
+    justify-content: flex-end;
+}
+@media all and (max-width: 768px) {
+    .col__content-wrap { flex-direction: column; }
+}
+.col__content-txt {
+    max-width: 22vw;
+    order: 2;
+    margin-left: 32px;
+    color: var(--ink-dim);
+}
+@media all and (max-width: 768px) {
+    .col__content-txt { order: 1; max-width: 40vw; margin: 0 0 10vw 10vw; }
+}
+.slide-link {
+    position: relative;
+    order: 1;
+    display: flex;
+    justify-content: flex-end;
+    width: 75px;
+    height: 53px;
+}
+.slide-link > * { pointer-events: none; }
+@media all and (max-width: 768px) {
+    .slide-link { order: 2; align-self: flex-end; }
+}
+.slide-link__circ {
+    width: 53px;
+    height: 53px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+}
+.slide-link__line {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    width: 64px;
+    height: 2px;
+    background: var(--gold);
+}
+.line { overflow: hidden; }
+.line__inner { display: block; }
+.slide__scroll-link {
+    position: absolute;
+    right: -113px;
+    bottom: 3.5vw;
+    display: block;
+    width: 140px;
+    height: 140px;
+    background: var(--gold-deep);
+    overflow: hidden;
+}
+@media all and (max-width: 768px) {
+    .slide__scroll-link { display: none; }
+}
+.slide__scroll-line {
+    position: absolute;
+    left: 26px;
+    bottom: 0;
+    width: 1px;
+    height: 100%;
+    background: #050505;
+}
+
+/* Column Image */
+.col__image-wrap {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 160vh;
+}
+.img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    }
+
+/* Footer */
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #0a0908;
+    position: relative;
+}
+.footer__logo { width: 120px; height: 120px; margin-bottom: 3vh; }
+.footer__link {
+    font-size: 4vw;
+    color: var(--gold);
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 1px;
+}
+.footer__link-top {
+    position: absolute;
+    left: 50%;
+    bottom: 100px;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background: var(--gold-deep);
+    font-size: 18px;
+    color: #050505;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+}
+.footer__link-top-line {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    width: 1px;
+    height: 50px;
+    background: var(--gold-deep);
+}
+.footer__copyright {
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    color: var(--ink-dim);
+    letter-spacing: 2px;
+}
+
+/* ---- Bölüm renk kimlikleri (Van Gogh paleti — altınla uyumlu, düşük doygunluk, eş parlaklık) ---- */
+.slide--1 { --acc: #6e9bff; --acc-deep: #3a5fb8; }
+.slide--2 { --acc: #9d7bff; --acc-deep: #6a4fc0; }
+.slide--3 { --acc: #e08d4f; --acc-deep: #b06a33; }
+.slide--4 { --acc: #a9c79a; --acc-deep: #6f8f62; }
+.slide .col__content-title { color: var(--acc); }
+.slide .col__content-title .no { color: var(--acc-deep); }
+.slide .slide-link__circ { border-color: var(--acc); }
+.slide .slide-link__line { background: var(--acc); }
+.slide .slide__scroll-link { background: var(--acc-deep); }
+.col__content--1 { background: #0d1118; }
+.col__content--2 { background: #100d18; }
+.col__content--3 { background: #171009; }
+.col__content--4 { background: #0e120d; }
+@media all and (max-width: 768px) {
+    .col__content--1 { background: rgba(13,17,24,0.92); }
+    .col__content--2 { background: rgba(16,13,24,0.92); }
+    .col__content--3 { background: rgba(23,16,9,0.92); }
+    .col__content--4 { background: rgba(14,18,13,0.92); }
+}
+</style>
+</head>
+<body>
+
+<div id="smooth-wrapper">
+    <div class="stage" id="smooth-content">
+        <header class="header">
+            <div class="logo"><img src="Logo/semih-akay-logo-transparent.png" alt="SA" /><span>Semih Akay</span></div>
+            <a href="#" class="nav-btn" aria-label="Menü">
+                <svg class="nav-btn__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 30">
+                    <rect class="nav-rect" width="40" height="2" x="8" y="8" fill="#d4b078" />
+                    <rect class="nav-rect" width="40" height="2" x="8" y="14" fill="#d4b078" />
+                    <rect width="40" height="2" x="8" y="20" fill="#d4b078" />
+                </svg>
+            </a>
+            <a href="#" class="lang-btn" aria-label="Language">TR</a>
+        </header>
+
+        <section class="intro slide--0" id="slide-0">
+            <div class="intro__content">
+                <h1 class="intro__title"><span class="intro-line">Semih</span><span class="intro-line intro-line--2">Akay</span></h1>
+                <p class="intro__txt" data-i18n="intro.txt">App developer, web designer, content creator and photographer. Craft and aesthetics at every step from idea to product: iOS games, animated web experiences, AI-assisted country songs and frames from my lens.</p>
+            </div>
+            <img class="intro__img intro__img--1" src="Logo/semih-akay-logo-transparent.png" alt="SA monogram" />
+            <img class="intro__img intro__img--2" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=80" alt="" />
+        </section>
+
+        <section class="slide slide--1" id="slide-1">
+            <div class="col col--1">
+                <div class="col__content col__content--1">
+                    <h2 class="col__content-title"><span class="line__inner" data-i18n="s1.title">Apps</span><br /><span class="line__inner no" data-i18n="s1.no">No. 01 — App Developer</span></h2>
+                    <div class="col__content-wrap">
+                        <p class="col__content-txt" data-i18n="s1.txt">I build original games and apps for iOS. Mixin, Drape and Kafejo — the whole journey from idea to the App Store, single-handed.</p>
+                        <a href="apps.html" class="slide-link" aria-label="Apps">
+                            <div class="slide-link__circ"></div>
+                            <div class="slide-link__line"></div>
+                        </a>
+                    </div>
+                </div>
+                <a href="#slide-2" class="slide__scroll-link">
+                    <div class="slide__scroll-line"></div>
+                </a>
+            </div>
+            <div class="col col--2">
+                <div class="col__image-wrap">
+                    <img class="img img--1" src="assets/art/uygulama.svg" alt="Uygulama geliştirme" />
+                </div>
+            </div>
+        </section>
+
+        <section class="slide slide--2" id="slide-2">
+            <div class="col col--1">
+                <div class="col__content col__content--2">
+                    <h2 class="col__content-title"><span class="line__inner" data-i18n="s2.title">Web</span><br /><span class="line__inner no" data-i18n="s2.no">No. 02 — Website Developer</span></h2>
+                    <div class="col__content-wrap">
+                        <p class="col__content-txt" data-i18n="s2.txt">Animated, performant and brand-specific web experiences, built with GSAP, Three.js and modern CSS techniques.</p>
+                        <a href="web.html" class="slide-link" aria-label="Web">
+                            <div class="slide-link__circ"></div>
+                            <div class="slide-link__line"></div>
+                        </a>
+                    </div>
+                </div>
+                <a href="#slide-3" class="slide__scroll-link">
+                    <div class="slide__scroll-line"></div>
+                </a>
+            </div>
+            <div class="col col--2">
+                <div class="col__image-wrap">
+                    <img class="img img--1" src="assets/art/web.svg" alt="Web geliştirme" />
+                </div>
+            </div>
+        </section>
+
+        <section class="slide slide--3" id="slide-3">
+            <div class="col col--1">
+                <div class="col__content col__content--3">
+                    <h2 class="col__content-title"><span class="line__inner" data-i18n="s3.title">YouTube</span><br /><span class="line__inner no" data-i18n="s3.no">No. 03 — AI Country Music</span></h2>
+                    <div class="col__content-wrap">
+                        <p class="col__content-txt" data-i18n="s3.txt">AI-assisted country songs I write and produce, on my channel. Blending AI with the human touch in lyrics, melody and visuals.</p>
+                        <a href="youtube.html" class="slide-link" aria-label="YouTube">
+                            <div class="slide-link__circ"></div>
+                            <div class="slide-link__line"></div>
+                        </a>
+                    </div>
+                </div>
+                <a href="#slide-4" class="slide__scroll-link">
+                    <div class="slide__scroll-line"></div>
+                </a>
+            </div>
+            <div class="col col--2">
+                <div class="col__image-wrap">
+                    <img class="img img--1" src="assets/art/youtube.svg" alt="YouTube içerik üretimi" />
+                </div>
+            </div>
+        </section>
+
+        <section class="slide slide--4" id="slide-4">
+            <div class="col col--1">
+                <div class="col__content col__content--4">
+                    <h2 class="col__content-title"><span class="line__inner" data-i18n="s4.title">Photo</span><br /><span class="line__inner no" data-i18n="s4.no">No. 04 — Photography</span></h2>
+                    <div class="col__content-wrap">
+                        <p class="col__content-txt" data-i18n="s4.txt">Street, nature and portraits. Telling stories with light and composition — the visual discipline that feeds all my work.</p>
+                        <a href="photo.html" class="slide-link" aria-label="Photo">
+                            <div class="slide-link__circ"></div>
+                            <div class="slide-link__line"></div>
+                        </a>
+                    </div>
+                </div>
+                <a href="#slide-5" class="slide__scroll-link">
+                    <div class="slide__scroll-line"></div>
+                </a>
+            </div>
+            <div class="col col--2">
+                <div class="col__image-wrap">
+                    <img class="img img--1" src="assets/art/fotograf.svg" alt="Fotoğrafçılık" />
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer" id="slide-5">
+            <img class="footer__logo" src="Logo/semih-akay-logo-transparent.png" alt="SA" />
+            <a class="footer__link" href="mailto:semih.akay@yahoo.com">semih.akay@yahoo.com</a>
+            <a class="footer__link-top" href="#slide-0">Top<span class="footer__link-top-line"></span></a>
+            <p class="footer__copyright">© 2026 Semih Akay</p>
+        </footer>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollToPlugin);
+
+/* ---- i18n ---- */
+const i18n = {
+  en: {
+    "doc.title": "Semih Akay — Portfolio",
+    "intro.txt": "App developer, web designer, content creator and photographer. Craft and aesthetics at every step from idea to product: iOS games, animated web experiences, AI-assisted country songs and frames from my lens.",
+    "s1.title": "Apps",
+    "s1.no": "No. 01 — App Developer",
+    "s1.txt": "I build original games and apps for iOS. Mixin, Drape and Kafejo — the whole journey from idea to the App Store, single-handed.",
+    "s2.title": "Web",
+    "s2.no": "No. 02 — Website Developer",
+    "s2.txt": "Animated, performant and brand-specific web experiences, built with GSAP, Three.js and modern CSS techniques.",
+    "s3.title": "YouTube",
+    "s3.no": "No. 03 — AI Country Music",
+    "s3.txt": "AI-assisted country songs I write and produce, on my channel. Blending AI with the human touch in lyrics, melody and visuals.",
+    "s4.title": "Photo",
+    "s4.no": "No. 04 — Photography",
+    "s4.txt": "Street, nature and portraits. Telling stories with light and composition — the visual discipline that feeds all my work."
+  },
+  tr: {
+    "doc.title": "Semih Akay — Portfolyo",
+    "intro.txt": "Uygulama geliştirici, web tasarımcısı, içerik üretici ve fotoğrafçı. Fikirden ürüne uzanan her adımda zanaat ve estetik bir arada: iOS oyunları, animasyonlu web deneyimleri, yapay zekâ destekli country şarkılar ve objektifimden kareler.",
+    "s1.title": "Uygulama",
+    "s1.no": "No. 01 — App Developer",
+    "s1.txt": "iOS için özgün oyunlar ve uygulamalar geliştiriyorum. Mixin, Drape ve Kafejo — fikirden App Store'a uzanan sürecin tamamı tek elden.",
+    "s2.title": "Web",
+    "s2.no": "No. 02 — Website Developer",
+    "s2.txt": "GSAP, Three.js ve güncel CSS teknikleriyle animasyonlu, performanslı ve markaya özgü web deneyimleri kuruyorum.",
+    "s3.title": "YouTube",
+    "s3.no": "No. 03 — AI Country Müzik",
+    "s3.txt": "Yapay zekâ destekli ürettiğim country şarkılar kanalımda. Söz, melodi ve görselde AI ile insan dokunuşunu harmanlıyorum.",
+    "s4.title": "Fotoğraf",
+    "s4.no": "No. 04 — Fotoğrafçılık",
+    "s4.txt": "Sokak, doğa ve portre. Işık ve kompozisyonla hikâye anlatmak — tüm işlerimi besleyen görsel disiplin."
+  }
+};
+let currentLang = "en";
+try { currentLang = localStorage.getItem("lang") || "en"; } catch (err) {}
+function setLang(l) {
+    currentLang = l;
+    document.documentElement.lang = l;
+    document.title = i18n[l]["doc.title"];
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (i18n[l][key]) el.textContent = i18n[l][key];
+    });
+    const btn = document.querySelector(".lang-btn");
+    if (btn) btn.textContent = (l === "en") ? "TR" : "EN";
+    try { localStorage.setItem("lang", l); } catch (err) {}
+}
+const select = e => document.querySelector(e);
+const selectAll = e => document.querySelectorAll(e);
+const stage = select('.stage');
+const slides = selectAll(".slide");
+const links = selectAll(".slide__scroll-link");
+let slideID = 0;
+
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const lenis = new Lenis({
+    duration: 1.2,
+    smoothWheel: !reducedMotion,
+    smoothTouch: false
+});
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+gsap.ticker.lagSmoothing(0);
+
+function initHeader() {
+    let tl = gsap.timeline({delay: 0.5});
+    tl.from('.logo', { y: -40, opacity: 0, duration: 2, ease: 'power4' })
+    .from('.nav-btn__svg rect', {
+        scale: 0,
+        transformOrigin: "center right",
+        duration: 0.6,
+        ease: 'power4',
+        stagger: 0.1
+    }, 0.6)
+    .to('.nav-rect', {
+        scale: 0.8,
+        transformOrigin: "center left",
+        duration: 0.4,
+        ease: 'power2',
+        stagger: 0.1
+    }, "-=0.6");
+
+    let navBtn = select('.nav-btn');
+    navBtn.addEventListener("mouseover", () => {
+        gsap.to('.nav-rect', { scaleX: 1, transformOrigin: "top left", duration: 0.4, ease: "power4" });
+    });
+    navBtn.addEventListener("mouseout", () => {
+        gsap.to('.nav-rect', { scaleX: 0.8, transformOrigin: "top left", duration: 0.6, ease: "power4" });
+    });
+}
+
+function initIntro() {
+    let tl = gsap.timeline({delay: 1.2});
+    tl.from('.intro-line', { y: 400, ease: 'power4', duration: 3, stagger: 0.15 })
+    .from('.intro__txt', { x: -100, opacity: 0, ease: 'power4', duration: 3 }, 0.7)
+    .from('.intro__img--1', { y: 50, opacity: 0, ease: 'power2', duration: 10 }, 1)
+    .from('.intro__img--2', { y: -50, opacity: 0, ease: 'power2', duration: 10 }, 1);
+
+    let stl = gsap.timeline({
+        scrollTrigger: {
+            trigger: '.intro',
+            scrub: 1,
+            start: "top bottom",
+            end: "bottom top"
+        }
+    });
+    stl.to('.intro__title', { x: 400, ease: 'power4.in', duration: 3 })
+       .to('.intro__txt', { y: 100, ease: 'power4.in', duration: 3 }, 0);
+}
+
+function initLinks() {
+    links.forEach((link, index) => {
+        let linkST = link.querySelector('.slide__scroll-line');
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            gsap.to(window, {
+                duration: 2,
+                scrollTo: { y: "#slide-" + (index + 2) },
+                ease: "power2.inOut"
+            });
+            slideID++;
+        });
+        link.addEventListener("mouseover", () => {
+            gsap.to(linkST, { y: 40, transformOrigin: "bottom center", duration: 0.6, ease: "power4" });
+        });
+        link.addEventListener("mouseout", () => {
+            gsap.to(linkST, { y: 0, transformOrigin: "bottom center", duration: 0.6, ease: "power4" });
+        });
+    });
+
+    let top = select('.footer__link-top');
+    top.addEventListener("click", (e) => {
+        e.preventDefault();
+        scrollTop();
+    });
+    top.addEventListener("mouseover", () => {
+        gsap.to('.footer__link-top-line', { scaleY: 3, transformOrigin: "bottom center", duration: 0.6, ease: "power4" });
+    });
+    top.addEventListener("mouseout", () => {
+        gsap.to('.footer__link-top-line', { scaleY: 1, transformOrigin: "bottom center", duration: 0.6, ease: "power4" });
+    });
+
+    selectAll('.slide-link').forEach((slideLink) => {
+        let slideL = slideLink.querySelector('.slide-link__line');
+        slideLink.addEventListener("mouseover", () => {
+            gsap.to(slideL, { x: 20, scaleX: 0.3, transformOrigin: "right center", duration: 0.8, ease: "power4" });
+        });
+        slideLink.addEventListener("mouseout", () => {
+            gsap.to(slideL, { x: 0, scaleX: 1, transformOrigin: "right center", duration: 0.8, ease: "power4" });
+        });
+    });
+}
+
+function initSlides() {
+    slides.forEach((slide) => {
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: slide,
+                start: "40% 50%"
+            }
+        });
+        tl.from(slide.querySelectorAll('.col__content-title'), {
+            ease: "power4",
+            y: "+=5vh",
+            duration: 2.5
+        })
+        .from(slide.querySelectorAll('.line__inner'), {
+            y: 200,
+            duration: 2,
+            ease: "power4",
+            stagger: 0.1
+        }, 0)
+        .from(slide.querySelectorAll('.col__content-txt'), {
+            x: 100,
+            y: 50,
+            opacity: 0,
+            duration: 2,
+            ease: "power4"
+        }, 0.4)
+        .from(slide.querySelectorAll('.slide-link'), {
+            x: -100,
+            y: 100,
+            opacity: 0,
+            duration: 2,
+            ease: "power4"
+        }, 0.3)
+        .from(slide.querySelectorAll('.slide__scroll-link'), {
+            y: 200,
+            duration: 3,
+            ease: "power4"
+        }, 0.4)
+        .to(slide.querySelectorAll('.slide__scroll-line'), {
+            scaleY: 0.6,
+            transformOrigin: "bottom left",
+            duration: 2.5,
+            ease: "elastic(1,0.5)"
+        }, 1.4);
+    });
+
+    gsap.from('.footer__link', {
+        scrollTrigger: {
+            trigger: '.footer',
+            scrub: 2,
+            start: "50% 100%",
+            end: "0% 0%"
+        },
+        y: "20vh",
+        ease: 'sine'
+    });
+}
+
+function initParallax() {
+    slides.forEach((slide) => {
+        let imageWrappers = slide.querySelectorAll('.col__image-wrap');
+        gsap.fromTo(imageWrappers, {
+            y: "-30vh"
+        }, {
+            y: "30vh",
+            scrollTrigger: {
+                trigger: slide,
+                scrub: true,
+                start: "top bottom",
+                snap: {
+                    snapTo: 0.5,
+                    duration: 1,
+                    ease: 'power4.inOut'
+                }
+            },
+            ease: 'none'
+        });
+    });
+}
+
+function scrollTop() {
+    gsap.to(window, {
+        duration: 2,
+        scrollTo: { y: "#slide-0" },
+        ease: "power2.inOut"
+    });
+    gsap.to('.footer__link-top-line', {
+        scaleY: 1,
+        transformOrigin: "bottom center",
+        duration: 0.6,
+        ease: "power4"
+    });
+}
+
+function initKeys() {
+    document.addEventListener('keydown', (e) => {
+        if (e.keyCode == 40) {
+            e.preventDefault();
+            if (slideID <= slides.length) {
+                slideID++;
+                gsap.to(window, {
+                    duration: 2,
+                    scrollTo: { y: "#slide-" + slideID },
+                    ease: "power2.inOut"
+                });
+            }
+        } else if (e.keyCode == 38) {
+            e.preventDefault();
+            slideID = 0;
+            scrollTop();
+        }
+    });
+}
+
+function init() {
+    setLang(currentLang);
+    const langBtn = select('.lang-btn');
+    langBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        setLang(currentLang === "en" ? "tr" : "en");
+    });
+    gsap.set(stage, { autoAlpha: 1 });
+    initHeader();
+    initIntro();
+    initLinks();
+    initSlides();
+    initParallax();
+    initKeys();
+}
+window.onload = () => {
+    init();
+};
+</script>
+
+</body>
+</html>
