@@ -118,6 +118,18 @@ a { color: var(--acc); }
 }
 .hero__title span { display: block; }
 .hero__txt { max-width: 480px; margin-top: 26px; color: var(--ink-dim); font-size: 16px; }
+.channel-btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 22px;
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    color: #050505;
+    background: var(--acc);
+    text-decoration: none;
+}
+.channel-btn:hover { background: var(--acc-deep); }
 
 .section { padding: 12vh 6vw; }
 .section__title {
@@ -133,6 +145,9 @@ a { color: var(--acc); }
     max-width: 1200px;
 }
 .pcard {
+    display: block;
+    text-decoration: none;
+    color: inherit;
     position: relative;
     background: var(--panel);
     border: 1px solid rgba(255,255,255,0.06);
@@ -191,35 +206,36 @@ a { color: var(--acc); }
         <p class="hero__no" data-i18n="hero.no">No. 03 — AI Country Music</p>
         <h1 class="hero__title"><span data-i18n="hero.title">YouTube</span></h1>
         <p class="hero__txt" data-i18n="hero.txt">AI-assisted country songs I write and produce. Blending AI with the human touch in lyrics, melody and visuals — all on my channel.</p>
+        <a class="channel-btn" href="https://www.youtube.com/@Akaysemih" target="_blank" rel="noopener" data-i18n="hero.btn">▶ youtube.com/@Akaysemih</a>
     </div>
 </section>
 
 <section class="section">
     <h2 class="section__title" data-i18n="sec.title">Latest Songs</h2>
     <div class="grid">
-        <article class="pcard">
+        <a class="pcard" href="https://www.youtube.com/watch?v=l5hVxrA3FN0" target="_blank" rel="noopener">
             <p class="pcard__tag" data-i18n="c1.tag">Country / AI-assisted</p>
             <h3 class="pcard__title" data-i18n="c1.title">Sweet For You</h3>
             <p class="pcard__txt" data-i18n="c1.txt">An upbeat country love song — warm strings and an easy smile.</p>
-            <span class="pcard__status" data-i18n="c1.st">Soon</span>
-        </article>
-        <article class="pcard">
+            <span class="pcard__status" data-i18n="c1.st">▶ Watch</span>
+        </a>
+        <a class="pcard" href="https://www.youtube.com/watch?v=zceMj3yPwzU" target="_blank" rel="noopener">
             <p class="pcard__tag" data-i18n="c2.tag">Country / AI-assisted</p>
             <h3 class="pcard__title" data-i18n="c2.title">Two Shadows in the Moonlight</h3>
             <p class="pcard__txt" data-i18n="c2.txt">A slow-burning ballad — two shadows dancing under the moonlight.</p>
-            <span class="pcard__status" data-i18n="c2.st">Soon</span>
-        </article>
-        <article class="pcard">
+            <span class="pcard__status" data-i18n="c2.st">▶ Watch</span>
+        </a>
+        <a class="pcard" href="https://www.youtube.com/watch?v=5SHRoP1UwtU" target="_blank" rel="noopener">
             <p class="pcard__tag" data-i18n="c3.tag">Country / AI-assisted</p>
             <h3 class="pcard__title" data-i18n="c3.title">Highway of Hearts</h3>
             <p class="pcard__txt" data-i18n="c3.txt">A road-trip anthem about hearts that never stop moving.</p>
-            <span class="pcard__status" data-i18n="c3.st">Soon</span>
-        </article>
+            <span class="pcard__status" data-i18n="c3.st">▶ Watch</span>
+        </a>
     </div>
 </section>
 
 <footer class="footer">
-    <h3 class="footer__cta" data-i18n="footer.cta">Subscribe and ride along</h3>
+    <a href="https://www.youtube.com/@Akaysemih" target="_blank" rel="noopener" style="text-decoration:none"><h3 class="footer__cta" data-i18n="footer.cta">Subscribe and ride along</h3></a>
     <a class="footer__mail" href="mailto:semih.akay@yahoo.com">semih.akay@yahoo.com</a>
     <p class="footer__copy">© 2026 Semih Akay</p>
 </footer>
@@ -234,6 +250,7 @@ const i18n = {
     "hero.no": "No. 03 — AI Country Music",
     "hero.title": "YouTube",
     "hero.txt": "AI-assisted country songs I write and produce. Blending AI with the human touch in lyrics, melody and visuals — all on my channel.",
+    "hero.btn": "▶ youtube.com/@Akaysemih",
     "sec.title": "Latest Songs",
     "c1.title": "Sweet For You",
     "c1.tag": "Country / AI-assisted",
@@ -244,9 +261,9 @@ const i18n = {
     "c3.title": "Highway of Hearts",
     "c3.tag": "Country / AI-assisted",
     "c3.txt": "A road-trip anthem about hearts that never stop moving.",
-    "c1.st": "Soon",
-    "c2.st": "Soon",
-    "c3.st": "Soon",
+    "c1.st": "▶ Watch",
+    "c2.st": "▶ Watch",
+    "c3.st": "▶ Watch",
     "back": "← Home",
     "footer.cta": "Subscribe and ride along"
   },
@@ -255,6 +272,7 @@ const i18n = {
     "hero.no": "No. 03 — AI Country Müzik",
     "hero.title": "YouTube",
     "hero.txt": "Yapay zekâ destekli ürettiğim country şarkılar. Söz, melodi ve görselde AI ile insan dokunuşunun harmanı — hepsi kanalımda.",
+    "hero.btn": "▶ youtube.com/@Akaysemih",
     "sec.title": "Son Şarkılar",
     "c1.title": "Sweet For You",
     "c1.tag": "Country / AI destekli",
@@ -265,9 +283,9 @@ const i18n = {
     "c3.title": "Highway of Hearts",
     "c3.tag": "Country / AI destekli",
     "c3.txt": "Durmak bilmeyen kalpler için bir yol şarkısı.",
-    "c1.st": "Yakında",
-    "c2.st": "Yakında",
-    "c3.st": "Yakında",
+    "c1.st": "▶ İzle",
+    "c2.st": "▶ İzle",
+    "c3.st": "▶ İzle",
     "back": "← Ana Sayfa",
     "footer.cta": "Abone ol, yolculuğa katıl"
   }
