@@ -88,14 +88,29 @@ a { color: var(--acc); }
     background: var(--panel);
     padding: 14vh 6vw 10vh;
 }
+#tubes-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+.hero__hint {
+    margin-top: 18px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: var(--ink-dim);
+    opacity: 0.8;
+}
 .hero__art {
     position: absolute;
+    z-index: 1;
     right: -4%;
     top: 0;
     height: 120%;
     width: 46%;
     object-fit: cover;
-    opacity: 0.9;
+    opacity: 0.45;
     pointer-events: none;
     -webkit-mask-image: linear-gradient(to right, transparent, black 30%);
     mask-image: linear-gradient(to right, transparent, black 30%);
@@ -103,7 +118,8 @@ a { color: var(--acc); }
 @media all and (max-width: 768px) {
     .hero__art { width: 100%; right: -20%; opacity: 0.3; }
 }
-.hero__content { position: relative; z-index: 2; max-width: 640px; }
+.hero__content { position: relative; z-index: 2; max-width: 640px; pointer-events: none; }
+.hero__content a, .hero__content .lang-btn { pointer-events: auto; }
 .hero__no {
     font-size: 14px;
     letter-spacing: 4px;
@@ -186,6 +202,7 @@ a { color: var(--acc); }
 </header>
 
 <section class="hero">
+    <canvas id="tubes-canvas"></canvas>
     <img class="hero__art" src="assets/art/web.svg" alt="" />
     <div class="hero__content">
         <p class="hero__no" data-i18n="hero.no">No. 02 — Website Developer</p>
@@ -255,6 +272,7 @@ const i18n = {
     "hero.no": "No. 02 — Website Developer",
     "hero.title": "Web",
     "hero.txt": "GSAP, Three.js ve güncel CSS teknikleriyle animasyonlu, performanslı ve markaya özgü web deneyimleri.",
+    "hero.hint": "İmleci gezdir — tıkla, renkler karışsın",
     "sec.title": "Seçilmiş İşler",
     "c1.title": "Bu Portfolyo",
     "c1.tag": "Tasarım & Kod",
@@ -308,5 +326,40 @@ if (!reducedMotion) {
 }
 </script>
 
+<script type="module">
+// Tubes Cursor — threejs-components, Kevin Levron
+// Licence CC BY-NC-SA 4.0 — Attribution: https://www.framer.com/@kevin-levron/
+const tubesReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const tubesCanvas = document.getElementById("tubes-canvas");
+if (!tubesReduced && tubesCanvas) {
+    try {
+        const { default: TubesCursor } = await import("https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js");
+        const tubesApp = TubesCursor(tubesCanvas, {
+            tubes: {
+                colors: ["#9d7bff", "#6a4fc0", "#e6c98e"],
+                lights: {
+                    intensity: 200,
+                    colors: ["#9d7bff", "#e6c98e", "#6a4fc0", "#b08cff"]
+                }
+            }
+        });
+        const palettes = [
+            { t: ["#9d7bff", "#6a4fc0", "#e6c98e"], l: ["#9d7bff", "#e6c98e", "#6a4fc0", "#b08cff"] },
+            { t: ["#d4b078", "#9d7bff", "#4a2f8f"], l: ["#e6c98e", "#9d7bff", "#d4b078", "#6a4fc0"] },
+            { t: ["#b08cff", "#e6c98e", "#3d2a70"], l: ["#b08cff", "#f0d9a8", "#8a63e8", "#6a4fc0"] },
+            { t: ["#6a4fc0", "#d4b078", "#9d7bff"], l: ["#8a63e8", "#e6c98e", "#b08cff", "#f0d9a8"] }
+        ];
+        let pi = 0;
+        document.body.addEventListener("click", (ev) => {
+            if (ev.target.closest("a")) return;
+            pi = (pi + 1) % palettes.length;
+            tubesApp.tubes.setColors(palettes[pi].t);
+            tubesApp.tubes.setLightsColors(palettes[pi].l);
+        });
+    } catch (err) {
+        console.warn("Tubes cursor yüklenemedi:", err);
+    }
+}
+</script>
 </body>
 </html>
