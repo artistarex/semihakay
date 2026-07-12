@@ -1,467 +1,351 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>YouTube — Semih Akay</title>
-<link rel="icon" href="Logo/semih-akay-logo.png" type="image/png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Noto+Sans:wght@300;400&display=swap" rel="stylesheet">
+<title>Astrobear Day/Night Toggle — Design Portfolyo #19</title>
 <style>
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+}
 :root {
-    --bg: #080706;
-    --gold: #d4b078;
-    --gold-deep: #b08c4f;
-    --ink: #cbc0ac;
-    --ink-dim: rgba(203, 192, 172, 0.75);
-    --acc: #e08d4f;
-    --acc-deep: #b06a33;
-    --panel: #171009;
+  --slide-ease: cubic-bezier(.4,-0.3,.6,1.3);
+	--easing: var(--slide-ease);
+	--speed: 0.5s;
+	--width: clamp(200px, 45vmin, 500px);
+	--ar: 8 / 3;
+	--ray: hsl(0 0% 100% / 0.5);
+	--sun: hsl(47, 91%, 58%);
+	--moon: hsl(212, 13%, 82%);
+	--crater: hsl(221, 16%, 68%);
+	--bg: hsl(219, 30%, 88%);
+	--bear-speed: 10s;
+  --color: hsl(219 30% 20%);
 }
-html { box-sizing: border-box; }
-*, *:before, *:after { box-sizing: inherit; }
+html {
+  color-scheme: light only;
+}
+[data-dark-mode=true] {
+  --bg: hsl(219, 30%, 12%);
+  --color: hsl(219 30% 98%);
+  color-scheme: dark only;
+}
 body {
-    margin: 0;
-    background-color: var(--bg);
-    font-family: 'Noto Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--ink);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-}
-h1, h2, h3, .logo { margin: 0; line-height: 1.1; font-family: 'Cinzel', serif; font-weight: 400; }
-p { margin: 0; }
-a { color: var(--acc); }
-
-.header {
-    position: fixed;
-    left: 40px;
-    right: 40px;
-    top: 24px;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-}
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    font-size: 20px;
-    letter-spacing: 2px;
-    color: var(--gold);
-    text-transform: uppercase;
-    text-decoration: none;
-}
-.logo img { width: 44px; height: 44px; display: block; }
-.header__right { margin-left: auto; display: flex; align-items: center; gap: 18px; }
-.back-link {
-    font-family: 'Cinzel', serif;
-    font-size: 15px;
-    letter-spacing: 1.5px;
-    color: var(--ink);
-    text-decoration: none;
-}
-.back-link:hover { color: var(--acc); }
-.lang-btn {
-    display: block;
-    padding: 5px 14px;
-    font-family: 'Cinzel', serif;
-    font-size: 15px;
-    letter-spacing: 2px;
-    color: var(--acc);
-    text-decoration: none;
-    border: 1px solid var(--acc-deep);
-}
-.lang-btn:hover { background: var(--acc-deep); color: #050505; }
-@media all and (max-width: 768px) {
-    .header { left: 20px; right: 20px; }
-    .logo span { display: none; }
-}
-
-.hero {
-    position: relative;
-    min-height: 92vh;
-    display: flex;
-    align-items: flex-end;
-    overflow: hidden;
-    background: var(--panel);
-    padding: 14vh 6vw 10vh;
-}
-.hero__art {
-    position: absolute;
-    right: -4%;
-    top: 0;
-    height: 120%;
-    width: 46%;
-    object-fit: cover;
-    opacity: 0.9;
-    pointer-events: none;
-    -webkit-mask-image: linear-gradient(to right, transparent, black 30%);
-    mask-image: linear-gradient(to right, transparent, black 30%);
-}
-@media all and (max-width: 768px) {
-    .hero__art { width: 100%; right: -20%; opacity: 0.3; }
-}
-.hero__content { position: relative; z-index: 2; max-width: 640px; }
-.hero__no {
-    font-size: 14px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--acc-deep);
-    margin-bottom: 18px;
-}
-.hero__title {
-    font-size: clamp(64px, 11vw, 150px);
-    color: var(--acc);
-    overflow: hidden;
-}
-.hero__title span { display: block; }
-.hero__txt { max-width: 480px; margin-top: 26px; color: var(--ink-dim); font-size: 16px; }
-.channel-btn {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 12px 22px;
-    font-family: 'Cinzel', serif;
-    font-size: 15px;
-    letter-spacing: 1.5px;
-    color: #050505;
-    background: var(--acc);
-    text-decoration: none;
-}
-.channel-btn:hover { background: var(--acc-deep); }
-
-.section { padding: 12vh 6vw; }
-.section__title {
-    font-size: clamp(30px, 4vw, 48px);
-    color: var(--ink);
-    margin-bottom: 6vh;
-    letter-spacing: 1px;
-}
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 28px;
-    max-width: 1200px;
-}
-.pcard {
-    display: block;
-    text-decoration: none;
-    color: inherit;
-    position: relative;
-    background: var(--panel);
-    border: 1px solid rgba(255,255,255,0.06);
-    padding: 34px 30px 30px;
-    transition: transform .45s cubic-bezier(.2,.8,.2,1), border-color .45s;
-}
-.pcard:hover { transform: translateY(-8px); border-color: var(--acc-deep); }
-.pcard__tag {
-    font-size: 12px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--acc-deep);
-}
-.pcard__title { font-size: 28px; color: var(--acc); margin: 12px 0 14px; }
-.pcard__txt { color: var(--ink-dim); font-size: 14.5px; }
-.pcard__status {
-    display: inline-block;
-    margin-top: 22px;
-    padding: 5px 14px;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #050505;
-    background: var(--acc);
-}
-
-.footer {
-    padding: 14vh 6vw 6vh;
-    text-align: center;
-    background: var(--panel);
-}
-.footer__cta { font-size: clamp(24px, 3.4vw, 40px); color: var(--ink); margin-bottom: 3vh; }
-.footer__mail {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(18px, 2.4vw, 28px);
-    color: var(--acc);
-    text-decoration: none;
-    letter-spacing: 1px;
-}
-.footer__copy { margin-top: 8vh; font-size: 13px; color: var(--ink-dim); letter-spacing: 2px; }
-
-/* ---- Şablon #19: Astrobear day/night toggle (uyarlama) ---- */
-.theme-switch { display: flex; align-items: center; margin-left: 26px; }
-.toggle {
-    -webkit-tap-highlight-color: transparent;
-    --slide-ease: cubic-bezier(.4,-0.3,.6,1.3);
-    --easing: var(--slide-ease);
-    --speed: 0.5s;
-    --width: 74px;
-    --ar: 8 / 3;
-    --ray: hsl(0 0% 100% / 0.5);
-    --sun: hsl(47, 91%, 58%);
-    --moon: hsl(212, 13%, 82%);
-    --crater: hsl(221, 16%, 68%);
-    --bear-speed: 10s;
-    width: var(--width);
-    z-index: 10;
-    will-change: transform;
-    isolation: isolate;
-    transform: translate3d(0, 0, 0);
-    aspect-ratio: var(--ar);
-    border-radius: 100vh;
-    border: 0;
-    position: relative;
-    padding: 0;
-    overflow: hidden;
-    cursor: pointer;
-    transition: background var(--speed) var(--easing);
-    --sky: hsl(204, 53%, 47%);
-    --night: hsl(229, 25%, 16%);
-    outline-color: transparent;
-    background: hsl(
-        calc(204 + (var(--dark, 0) * 25))
-        calc((53 - (var(--dark, 0) * 28)) * 1%)
-        calc((47 - (var(--dark, 0) * 31)) * 1%)
-    );
-    box-shadow:
-        calc(var(--width) * 0) calc(var(--width) * 0.02) calc(var(--width) * 0.01) calc(var(--width) * -0.0025) hsl(210 10% 100% / 0.95),
-        calc(var(--width) * 0) calc(var(--width) * -0.02) calc(var(--width) * 0.01) calc(var(--width) * -0.0025) hsl(210 10% 10% / 0.2),
-        calc(var(--width) * 0) calc(var(--width) * 0.02) calc(var(--width) * 0.5) 0 hsl(210 10% 100% / 0.15);
-}
-.toggle:after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    box-shadow:
-        calc(var(--width) * 0) calc(var(--width) * -0.025) calc(var(--width) * 0.025) 0 hsl(210 10% 10% / 0.15) inset,
-        calc(var(--width) * 0) calc(var(--width) * 0.025) calc(var(--width) * 0.025) 0 hsl(210 10% 10% / 0.65) inset;
-    border-radius: 100vh;
+	display: grid;
+	place-items: center;
+	min-height: 100vh;
+	margin: 0;
+	overflow: hidden;
+	background: var(--bg);
+  transition: background var(--speed) var(--easing);
+	font-family: sans-serif, system-ui;
 }
 .toggle__backdrop:first-of-type .clouds path:first-of-type {
-    fill: var(--ray);
+	fill: var(--ray);
+}
+.toggle {
+  -webkit-tap-highlight-color: transparent;
+	width: var(--width);
+  z-index: 10;
+  will-change: transform;
+  isolation: isolate;
+  transform: translate3d(0, 0, 0);
+	aspect-ratio: var(--ar);
+	border-radius: 100vh;
+	border: 0;
+	position: relative;
+	padding: 0;
+	overflow: hidden;
+	cursor: pointer;
+	transition: background var(--speed) var(--easing);
+	--sky: hsl(204, 53%, 47%);
+	--night: hsl(229, 25%, 16%);
+	outline-color: transparent;
+	background: hsl(
+		calc(204 + (var(--dark, 0) * 25))
+		calc((53 - (var(--dark, 0) * 28)) * 1%)
+		calc((47 - (var(--dark, 0) * 31)) * 1%)
+	);
+	box-shadow:
+		calc(var(--width) * 0) calc(var(--width) * 0.02) calc(var(--width) * 0.01) calc(var(--width) * -0.0025) hsl(210 10% 100% / 0.95),
+		calc(var(--width) * 0) calc(var(--width) * -0.02) calc(var(--width) * 0.01) calc(var(--width) * -0.0025) hsl(210 10% 10% / 0.2),
+		calc(var(--width) * 0) calc(var(--width) * 0.02) calc(var(--width) * 0.5) 0 hsl(210 10% 100% / 0.15);
+}
+.toggle:after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	box-shadow:
+		calc(var(--width) * 0) calc(var(--width) * -0.025) calc(var(--width) * 0.025) 0 hsl(210 10% 10% / 0.15) inset,
+		calc(var(--width) * 0) calc(var(--width) * 0.025) calc(var(--width) * 0.025) 0 hsl(210 10% 10% / 0.65) inset;
+	border-radius: 100vh;
 }
 .toggle__content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
-    border-radius: 100vh;
-    display: block;
-    clip-path: inset( 0 0 0 0 round 100vh);
-    container-type: inline-size;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  border-radius: 100vh;
+  display: block;
+  clip-path: inset( 0 0 0 0 round 100vh);
+  container-type: inline-size;
 }
 .toggle__backdrop {
-    overflow: visible !important;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    left: 0;
-    transition: translate var(--speed) var(--easing);
-    translate: 0 calc(
-        var(--dark, 0) * (100% - (3 / 8 * var(--width)))
-    );
+  overflow: visible !important;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	left: 0;
+	transition: translate var(--speed) var(--easing);
+	translate: 0 calc(
+		var(--dark, 0) * (100% - (3 / 8 * var(--width)))
+	);
 }
 [aria-pressed=false] .toggle__backdrop:last-of-type {
-    transition-timing-function: cubic-bezier(.2,-0.6,.7,1.6);
+	transition-timing-function: cubic-bezier(.2,-0.6,.7,1.6);
 }
 [aria-pressed=false] .stars path {
-    transition-delay: 0s;
+	transition-delay: 0s;
 }
 .stars path {
-    transform-box: fill-box;
-    transform-origin: 25% 50%;
-    scale: calc(0.25 + (var(--dark, 0) * 0.75));
-    transition: scale var(--speed) calc(var(--speed) * 0.5) var(--easing);
+	transform-box: fill-box;
+	transform-origin: 25% 50%;
+	scale: calc(0.25 + (var(--dark, 0) * 0.75));
+	transition: scale var(--speed) calc(var(--speed) * 0.5) var(--easing);
 }
 .toggle__indicator {
-    height: 100%;
-    aspect-ratio: 1;
-    border-radius: 0%;
-    display: grid;
-    place-items: center;
-    padding: 3%;
-    transition: translate var(--speed) var(--slide-ease);
-    translate: calc(var(--dark, 0) * (100cqi - 100%)) 0;
-}
-.toggle__star {
-    height: 100%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    position: relative;
-    transition: translate var(--speed) var(--easing);
-    translate: calc((var(--dark, 0) * -10%) + 5%) 0;
-}
-.sun {
-    background: var(--sun);
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    overflow: hidden;
-    box-shadow:
-        calc(var(--width) * 0.01) calc(var(--width) * 0.01) calc(var(--width) * 0.02) 0 hsl(210 10% 100% / 0.95) inset,
-        calc(var(--width) * -0.01) calc(var(--width) * -0.01) calc(var(--width) * 0.02) 0 hsl(210 10% 20% / 0.5) inset;
-}
-.moon {
-    position: absolute;
-    inset: -1%;
-    border-radius: 50%;
-    background: var(--moon);
-    transition: translate var(--speed) ease-in-out;
-    translate: calc((100 - (var(--dark, 0) * 100)) * 1%) 0%;
-    box-shadow:
-        calc(var(--width) * 0.01) calc(var(--width) * 0.01) calc(var(--width) * 0.02) 0 hsl(210 10% 100% / 0.95) inset,
-        calc(var(--width) * -0.01) calc(var(--width) * -0.01) calc(var(--width) * 0.02) 0 hsl(210 10% 10% / 0.95) inset;
-}
-.moon__crater {
-    position: absolute;
-    background: var(--crater);
-    border-radius: 50%;
-    width: calc(var(--size, 10) * 1%);
-    aspect-ratio: 1;
-    left: calc(var(--x) * 1%);
-    top: calc(var(--y) * 1%);
-    box-shadow:
-        calc(var(--width) * 0.01) calc(var(--width) * 0.01) calc(var(--width) * 0.01) 0 hsl(210 10% 6% / 0.25) inset,
-        0 calc(var(--width) * 0.005) calc(var(--width) * 0.01) 0 hsl(210 10% 100% / 0.25);
-}
-.moon__crater:nth-of-type(1) { --size: 18; --x: 40; --y: 15; }
-.moon__crater:nth-of-type(2) { --size: 20; --x: 65; --y: 58; }
-.moon__crater:nth-of-type(3) { --size: 34; --x: 18; --y: 40; }
-.toggle__star:before {
-    content: "";
-    z-index: -1;
-    width: 356%;
-    background:
-        radial-gradient(hsl(0 0% 100% / 0.25) 40%, transparent 40.5%),
-        radial-gradient(hsl(0 0% 100% / 0.25) 56%, transparent 56.5%)
-      hsl(0 0% 100% / 0.25);
-    border-radius: 50%;
-    aspect-ratio: 1;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transition: translate var(--speed) var(--easing);
-    translate: calc(
-        (50 - (var(--dark, 0) * 4)) *
-        -1%
-    )
-    -50%;
-}
-.toggle__star:after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    display: block;
-    background: hsl(0 0% 0% / 0.5);
-    filter: blur(4px);
-    translate: 2% 4%;
-    border-radius: 50%;
-    z-index: -1;
-}
-.toggle__indicator-wrapper {
-    position: absolute;
-    inset: 0;
-}
-[aria-pressed=true] {
-    --dark: 1;
-}
-.stars g {
-    transform-box: fill-box;
-    transform-origin: 50% 50%;
-}
-.stars g:nth-of-type(3) { animation: twinkle 4s -2s infinite; }
-.stars g:nth-of-type(11) { animation: twinkle 6s -2s infinite; }
-.stars g:nth-of-type(9) { animation: twinkle 4s -1s infinite; }
-@keyframes twinkle {
-    0%, 40%, 60%, 100% { transform: scale(1); }
-    50% { transform: scale(0); }
-}
-.astrobear {
-    width: 12%;
-    position: absolute;
-    top: 100%;
-    left: 0%;
-    transition: translate calc(var(--speed) + (var(--dark, 0) * (var(--bear-speed) - var(--speed))))
-        calc(var(--bear-speed) * (0.4 * var(--dark, 0))) linear;
-    translate: calc(var(--dark, 0) * 400%) calc(var(--dark, 0) * -350%);
-}
-.astrobear svg {
-    transform-origin: 50% 75%;
-    scale: var(--dark, 0);
-    rotate: calc(var(--dark, 0) * 360deg);
-    transition: rotate calc(var(--speed) + (var(--dark, 0) * (var(--bear-speed) - var(--speed)))) calc(var(--bear-speed) * 0.4) linear, scale var(--speed) ease-in-out;
-}
-.astrobear__container {
-    position: absolute;
-    overflow: hidden;
-    inset: 0;
-    clip-path: inset(0 0 0 0);
-    opacity: var(--dark, 0);
-    translate: 0 calc(-200% + (var(--dark, 0) * 200%));
-    transition: opacity var(--speed) var(--easing), translate var(--speed) var(--easing);
-}
-.pilot__container {
-    position: absolute;
-    overflow: hidden;
-    inset: 0;
-    clip-path: inset(0 0 0 0);
-    opacity: calc(1 - var(--dark, 0));
-    translate: 0 calc(var(--dark, 0) * 200%);
-    transition: opacity var(--speed) var(--easing), translate var(--speed) var(--easing);
+	height: 100%;
+	aspect-ratio: 1;
+	border-radius: 0%;
+	display: grid;
+	place-items: center;
+	padding: 3%;
+  transition: translate var(--speed) var(--slide-ease);
+  translate: calc(var(--dark, 0) * (100cqi - 100%)) 0;
 }
 .pilot-bear {
-    width: 18%;
-    position: absolute;
-    top: 70%;
-    left: 100%;
-    transition:
-        translate
-            calc(
-                var(--speed) + ((1 - var(--dark, 0)) *
-                    ((var(--bear-speed) * 0.5) - var(--speed))))
-            calc((var(--bear-speed) * 0.5) * ((1 - var(--dark, 0)) * 0.4)) linear;
-    translate:
-        calc(
-            (0 - (1 - var(--dark, 0))) * (var(--width) + 100%)
-        ) calc(
-        (0 - (1 - var(--dark, 0))) * (200%)
-    );
+	position: absolute;
+	width: 25%;
+}
+.toggle__star {
+	height: 100%;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	position: relative;
+	transition: translate var(--speed) var(--easing);
+	translate: calc((var(--dark, 0) * -10%) + 5%) 0;
+}
+.sun {
+	background: var(--sun);
+	position: absolute;
+	inset: 0;
+	border-radius: 50%;
+	overflow: hidden;
+	box-shadow:
+		calc(var(--width) * 0.01) calc(var(--width) * 0.01) calc(var(--width) * 0.02) 0 hsl(210 10% 100% / 0.95) inset,
+		calc(var(--width) * -0.01) calc(var(--width) * -0.01) calc(var(--width) * 0.02) 0 hsl(210 10% 20% / 0.5) inset;
+}
+.moon {
+	position: absolute;
+	inset: -1%;
+	border-radius: 50%;
+	background: var(--moon);
+  transition: translate var(--speed) ease-in-out;
+	translate: calc((100 - (var(--dark, 0) * 100)) * 1%) 0%;
+	box-shadow:
+		calc(var(--width) * 0.01) calc(var(--width) * 0.01) calc(var(--width) * 0.02) 0 hsl(210 10% 100% / 0.95) inset,
+		calc(var(--width) * -0.01) calc(var(--width) * -0.01) calc(var(--width) * 0.02) 0 hsl(210 10% 10% / 0.95) inset;
+}
+.moon__crater {
+	position: absolute;
+	background: var(--crater);
+	border-radius: 50%;
+	width: calc(var(--size, 10) * 1%);
+	aspect-ratio: 1;
+	left: calc(var(--x) * 1%);
+	top: calc(var(--y) * 1%);
+	box-shadow:
+		calc(var(--width) * 0.01) calc(var(--width) * 0.01) calc(var(--width) * 0.01) 0 hsl(210 10% 6% / 0.25) inset,
+		0 calc(var(--width) * 0.005) calc(var(--width) * 0.01) 0 hsl(210 10% 100% / 0.25);
+}
+.moon__crater:nth-of-type(1) {
+	--size: 18;
+	--x: 40;
+	--y: 15;
+}
+.moon__crater:nth-of-type(2) {
+	--size: 20;
+	--x: 65;
+	--y: 58;
+}
+.moon__crater:nth-of-type(3) {
+	--size: 34;
+	--x: 18;
+	--y: 40;
+}
+.toggle__star:before {
+	content: "";
+	z-index: -1;
+	width: 356%;
+	background:
+		radial-gradient(hsl(0 0% 100% / 0.25) 40%, transparent 40.5%),
+		radial-gradient(hsl(0 0% 100% / 0.25) 56%, transparent 56.5%)
+	  hsl(0 0% 100% / 0.25);
+	border-radius: 50%;
+	aspect-ratio: 1;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transition: translate var(--speed) var(--easing);
+	translate: calc(
+		(50 - (var(--dark, 0) * 4)) *
+		-1%
+	)
+	-50%;
+}
+.toggle__star:after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	display: block;
+	background: hsl(0 0% 0% / 0.5);
+	filter: blur(4px);
+	translate: 2% 4%;
+	border-radius: 50%;
+	z-index: -1;
+}
+.toggle__indicator-wrapper {
+	position: absolute;
+	inset: 0;
+}
+[aria-pressed=true] {
+	--dark: 1;
+}
+.stars g {
+	transform-box: fill-box;
+	transform-origin: 50% 50%;
+}
+.stars g:nth-of-type(3) {
+	animation: twinkle 4s -2s infinite;
+}
+.stars g:nth-of-type(11) {
+	animation: twinkle 6s -2s infinite;
+}
+.stars g:nth-of-type(9) {
+	animation: twinkle 4s -1s infinite;
+}
+@keyframes twinkle {
+	0%, 40%, 60%, 100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(0);
+	}
+}
+.astrobear {
+	width: 12%;
+	position: absolute;
+	top: 100%;
+	left: 0%;
+	transition: translate calc(var(--speed) + (var(--dark, 0) * (var(--bear-speed) - var(--speed))))
+		calc(var(--bear-speed) * (0.4 * var(--dark, 0))) linear;
+	translate: calc(var(--dark, 0) * 400%) calc(var(--dark, 0) * -350%);
+}
+.astrobear svg {
+	transform-origin: 50% 75%;
+	scale: var(--dark, 0);
+	rotate: calc(var(--dark, 0) * 360deg);
+	transition: rotate calc(var(--speed) + (var(--dark, 0) * (var(--bear-speed) - var(--speed)))) calc(var(--bear-speed) * 0.4) linear, scale var(--speed) ease-in-out;
+}
+.astrobear__container {
+	position: absolute;
+	overflow: hidden;
+	inset: 0;
+	clip-path: inset(0 0 0 0);
+	opacity: var(--dark, 0);
+	translate: 0 calc(-200% + (var(--dark, 0) * 200%));
+	transition: opacity var(--speed) var(--easing), translate var(--speed) var(--easing);
+}
+.pilot__container {
+	position: absolute;
+	overflow: hidden;
+	inset: 0;
+	clip-path: inset(0 0 0 0);
+	opacity: calc(1 - var(--dark, 0));
+	translate: 0 calc(var(--dark, 0) * 200%);
+	transition: opacity var(--speed) var(--easing), translate var(--speed) var(--easing);
+}
+.pilot-bear {
+	width: 18%;
+	position: absolute;
+	top: 70%;
+	left: 100%;
+	transition:
+		translate
+			calc(
+				var(--speed) + ((1 - var(--dark, 0)) *
+					((var(--bear-speed) * 0.5) - var(--speed))))
+			calc((var(--bear-speed) * 0.5) * ((1 - var(--dark, 0)) * 0.4)) linear;
+	translate:
+		calc(
+			(0 - (1 - var(--dark, 0))) * (var(--width) + 100%)
+		) calc(
+		(0 - (1 - var(--dark, 0))) * (200%)
+	);
 }
 .pilot {
-    rotate: 12deg;
-    animation: fly 4s infinite ease-in-out;
+	rotate: 12deg;
+	animation: fly 4s infinite ease-in-out;
 }
 @keyframes fly {
-    50% { translate: 0 -25%; }
+	50% { translate: 0 -25%; }
 }
-
-/* ---- Aydınlık tema ---- */
-html[data-theme="light"] {
-    --bg: #f3ecdd;
-    --gold: #9a7332;
-    --gold-deep: #7c5a22;
-    --gold-soft: #b08c4f;
-    --ink: #3a3127;
-    --ink-dim: rgba(58, 49, 39, 0.78);
+.controls {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: sans-serif;
+  color: var(--color);
+  transition: color var(--speed) var(--easing);
 }
-html[data-theme="light"] { --panel: #ece1cc; }
-html[data-theme="light"] { --acc: #94551f; --acc-deep: #7a4517; }
-html[data-theme="light"] .pcard { border-color: rgba(0,0,0,0.1); }
-html[data-theme="light"] .back-link { color: var(--ink); }
+[type=checkbox] {
+  accent-color: var(--color);
+  transition: accent-color var(--speed) var(--easing);
+}
+.bear-link {
+	color: canvasText;
+	position: fixed;
+	top: 1rem;
+	left: 1rem;
+	width: 48px;
+	aspect-ratio: 1;
+	display: grid;
+	place-items: center;
+	opacity: 0.8;
+  transition: color var(--speed);
+}
+:where(.x-link, .bear-link):is(:hover, :focus-visible) {
+	opacity: 1;
+}
+.bear-link svg {
+	width: 75%;
+}
 </style>
 </head>
 <body>
 
-<header class="header">
-    <a class="logo" href="index.html"><img src="Logo/semih-akay-logo-transparent.png" alt="SA" /><span>Semih Akay</span></a>
-    <div class="header__right">
-        <a href="index.html" class="back-link" data-i18n="back">← Home</a>
-        <a href="#" class="lang-btn" aria-label="Language">TR</a>
-        <span class="theme-switch" aria-label="Dark / Light">
-            <button class="toggle" id="theme-toggle-btn" type="button" aria-pressed="false" title="Tema değiştir">
+<div class="controls">
+  <label for="sync">Sync &lt;body&gt;</label>
+  <input id="sync" type="checkbox" checked/>
+</div>
+<button class="toggle" aria-pressed="false" title="Toggle Dark Mode">
   <span class="toggle__content">
     <svg aria-hidden="true" class="toggle__backdrop" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 290 228">
       <g class="clouds">
@@ -656,154 +540,75 @@ html[data-theme="light"] .back-link { color: var(--ink); }
       </span>
     </span>
   </span>
-            </button>
-        </span>
-    </div>
-</header>
+</button>
+<a
+      class="bear-link"
+      href="https://twitter.com/intent/follow?screen_name=jh3yy"
+      target="_blank"
+      rel="noreferrer noopener"
+    >
+      <svg
+        class="w-9"
+        viewBox="0 0 969 955"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="161.191"
+          cy="320.191"
+          r="133.191"
+          stroke="currentColor"
+          stroke-width="20"
+        ></circle>
+        <circle
+          cx="806.809"
+          cy="320.191"
+          r="133.191"
+          stroke="currentColor"
+          stroke-width="20"
+        ></circle>
+        <circle
+          cx="695.019"
+          cy="587.733"
+          r="31.4016"
+          fill="currentColor"
+        ></circle>
+        <circle
+          cx="272.981"
+          cy="587.733"
+          r="31.4016"
+          fill="currentColor"
+        ></circle>
+        <path
+          d="M564.388 712.083C564.388 743.994 526.035 779.911 483.372 779.911C440.709 779.911 402.356 743.994 402.356 712.083C402.356 680.173 440.709 664.353 483.372 664.353C526.035 664.353 564.388 680.173 564.388 712.083Z"
+          fill="currentColor"
+        ></path>
+        <rect
+          x="310.42"
+          y="448.31"
+          width="343.468"
+          height="51.4986"
+          fill="#FF1E1E"
+        ></rect>
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M745.643 288.24C815.368 344.185 854.539 432.623 854.539 511.741H614.938V454.652C614.938 433.113 597.477 415.652 575.938 415.652H388.37C366.831 415.652 349.37 433.113 349.37 454.652V511.741L110.949 511.741C110.949 432.623 150.12 344.185 219.845 288.24C289.57 232.295 384.138 200.865 482.744 200.865C581.35 200.865 675.918 232.295 745.643 288.24Z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    </a>
 
-<section class="hero">
-    <img class="hero__art" src="assets/art/youtube.svg" alt="" />
-    <div class="hero__content">
-        <p class="hero__no" data-i18n="hero.no">No. 03 — AI Country Music</p>
-        <h1 class="hero__title"><span data-i18n="hero.title">YouTube</span></h1>
-        <p class="hero__txt" data-i18n="hero.txt">AI-assisted country songs I write and produce. Blending AI with the human touch in lyrics, melody and visuals — all on my channel.</p>
-        <a class="channel-btn" href="https://www.youtube.com/@Akaysemih" target="_blank" rel="noopener" data-i18n="hero.btn">▶ youtube.com/@Akaysemih</a>
-    </div>
-</section>
-
-<section class="section">
-    <h2 class="section__title" data-i18n="sec.title">Latest Songs</h2>
-    <div class="grid">
-        <a class="pcard" href="https://www.youtube.com/watch?v=l5hVxrA3FN0" target="_blank" rel="noopener">
-            <p class="pcard__tag" data-i18n="c1.tag">Country / AI-assisted</p>
-            <h3 class="pcard__title" data-i18n="c1.title">Sweet For You</h3>
-            <p class="pcard__txt" data-i18n="c1.txt">An upbeat country love song — warm strings and an easy smile.</p>
-            <span class="pcard__status" data-i18n="c1.st">▶ Watch</span>
-        </a>
-        <a class="pcard" href="https://www.youtube.com/watch?v=zceMj3yPwzU" target="_blank" rel="noopener">
-            <p class="pcard__tag" data-i18n="c2.tag">Country / AI-assisted</p>
-            <h3 class="pcard__title" data-i18n="c2.title">Two Shadows in the Moonlight</h3>
-            <p class="pcard__txt" data-i18n="c2.txt">A slow-burning ballad — two shadows dancing under the moonlight.</p>
-            <span class="pcard__status" data-i18n="c2.st">▶ Watch</span>
-        </a>
-        <a class="pcard" href="https://www.youtube.com/watch?v=5SHRoP1UwtU" target="_blank" rel="noopener">
-            <p class="pcard__tag" data-i18n="c3.tag">Country / AI-assisted</p>
-            <h3 class="pcard__title" data-i18n="c3.title">Highway of Hearts</h3>
-            <p class="pcard__txt" data-i18n="c3.txt">A road-trip anthem about hearts that never stop moving.</p>
-            <span class="pcard__status" data-i18n="c3.st">▶ Watch</span>
-        </a>
-    </div>
-</section>
-
-<footer class="footer">
-    <a href="https://www.youtube.com/@Akaysemih" target="_blank" rel="noopener" style="text-decoration:none"><h3 class="footer__cta" data-i18n="footer.cta">Subscribe and ride along</h3></a>
-    <a class="footer__mail" href="mailto:semih.akay@yahoo.com">semih.akay@yahoo.com</a>
-    <p class="footer__copy">© 2026 Semih Akay</p>
-</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
-gsap.registerPlugin(ScrollTrigger);
-const i18n = {
-  "en": {
-    "doc.title": "YouTube — Semih Akay",
-    "hero.no": "No. 03 — AI Country Music",
-    "hero.title": "YouTube",
-    "hero.txt": "AI-assisted country songs I write and produce. Blending AI with the human touch in lyrics, melody and visuals — all on my channel.",
-    "hero.btn": "▶ youtube.com/@Akaysemih",
-    "sec.title": "Latest Songs",
-    "c1.title": "Sweet For You",
-    "c1.tag": "Country / AI-assisted",
-    "c1.txt": "An upbeat country love song — warm strings and an easy smile.",
-    "c2.title": "Two Shadows in the Moonlight",
-    "c2.tag": "Country / AI-assisted",
-    "c2.txt": "A slow-burning ballad — two shadows dancing under the moonlight.",
-    "c3.title": "Highway of Hearts",
-    "c3.tag": "Country / AI-assisted",
-    "c3.txt": "A road-trip anthem about hearts that never stop moving.",
-    "c1.st": "▶ Watch",
-    "c2.st": "▶ Watch",
-    "c3.st": "▶ Watch",
-    "back": "← Home",
-    "footer.cta": "Subscribe and ride along"
-  },
-  "tr": {
-    "doc.title": "YouTube — Semih Akay",
-    "hero.no": "No. 03 — AI Country Müzik",
-    "hero.title": "YouTube",
-    "hero.txt": "Yapay zekâ destekli ürettiğim country şarkılar. Söz, melodi ve görselde AI ile insan dokunuşunun harmanı — hepsi kanalımda.",
-    "hero.btn": "▶ youtube.com/@Akaysemih",
-    "sec.title": "Son Şarkılar",
-    "c1.title": "Sweet For You",
-    "c1.tag": "Country / AI destekli",
-    "c1.txt": "Tempolu bir country aşk şarkısı — sıcak teller ve kolay bir gülümseme.",
-    "c2.title": "Two Shadows in the Moonlight",
-    "c2.tag": "Country / AI destekli",
-    "c2.txt": "Ağır ağır yanan bir balad — ay ışığında dans eden iki gölge.",
-    "c3.title": "Highway of Hearts",
-    "c3.tag": "Country / AI destekli",
-    "c3.txt": "Durmak bilmeyen kalpler için bir yol şarkısı.",
-    "c1.st": "▶ İzle",
-    "c2.st": "▶ İzle",
-    "c3.st": "▶ İzle",
-    "back": "← Ana Sayfa",
-    "footer.cta": "Abone ol, yolculuğa katıl"
-  }
+const BUTTON = document.querySelector("button");
+const SYNC = document.querySelector("#sync")
+const TOGGLE = () => {
+  const IS_PRESSED = BUTTON.matches("[aria-pressed=true]");
+  if (SYNC.checked)
+    document.body.setAttribute("data-dark-mode", IS_PRESSED ? false : true);
+  BUTTON.setAttribute("aria-pressed", IS_PRESSED ? false : true);
 };
-let currentLang = "en";
-try { currentLang = localStorage.getItem("lang") || "en"; } catch (err) {}
-function setLang(l) {
-    currentLang = l;
-    document.documentElement.lang = l;
-    document.title = i18n[l]["doc.title"];
-    document.querySelectorAll("[data-i18n]").forEach((el) => {
-        const key = el.getAttribute("data-i18n");
-        if (i18n[l][key]) el.textContent = i18n[l][key];
-    });
-    const btn = document.querySelector(".lang-btn");
-    if (btn) btn.textContent = (l === "en") ? "TR" : "EN";
-    try { localStorage.setItem("lang", l); } catch (err) {}
-}
-setLang(currentLang);
-document.querySelector(".lang-btn").addEventListener("click", (e) => {
-    e.preventDefault();
-    setLang(currentLang === "en" ? "tr" : "en");
-});
-
-
-/* ---- Tema (dark/light) - Şablon #19 Astrobear toggle ---- */
-const themeToggleBtn = document.getElementById("theme-toggle-btn");
-let currentTheme = "dark";
-try { currentTheme = localStorage.getItem("theme") || "dark"; } catch (err) {}
-function setTheme(t) {
-    currentTheme = t;
-    document.documentElement.setAttribute("data-theme", t);
-    if (themeToggleBtn) themeToggleBtn.setAttribute("aria-pressed", t === "dark" ? "true" : "false");
-    try { localStorage.setItem("theme", t); } catch (err) {}
-}
-setTheme(currentTheme);
-if (themeToggleBtn) {
-    themeToggleBtn.addEventListener("click", () => {
-        const isDark = themeToggleBtn.getAttribute("aria-pressed") === "true";
-        setTheme(isDark ? "light" : "dark");
-    });
-}
-
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-if (!reducedMotion) {
-    gsap.from(".hero__title span", { y: 160, duration: 1.6, ease: "power4", delay: 0.2 });
-    gsap.from(".hero__no", { opacity: 0, x: -40, duration: 1.4, ease: "power4", delay: 0.3 });
-    gsap.from(".hero__txt", { opacity: 0, y: 40, duration: 1.6, ease: "power4", delay: 0.5 });
-    gsap.from(".hero__art", { opacity: 0, x: 80, duration: 2, ease: "power2", delay: 0.4 });
-    gsap.utils.toArray(".pcard").forEach((card, i) => {
-        gsap.from(card, {
-            opacity: 0, y: 60, duration: 1.2, ease: "power4",
-            scrollTrigger: { trigger: card, start: "top 88%" },
-            delay: (i % 3) * 0.12
-        });
-    });
-}
+BUTTON.addEventListener("click", TOGGLE);
 </script>
 
 </body>
